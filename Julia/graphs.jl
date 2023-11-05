@@ -20,9 +20,6 @@ function successor(g::AbstractGraph)::DiGraph
         label_type = Edge
     )
 
-    # for e ∈ E₁
-    #     mg[e] = nothing
-    # end
     add_vertex!.(Ref(mg), E₁)
 
     for (f, e) ∈ E₂
