@@ -2,9 +2,9 @@ using Graphs
 using MetaGraphsNext
 using GraphPlot
 
-```
-first interaction graph
-````
+"""
+first interaction graph of g
+"""
 function successor(g::AbstractGraph)::DiGraph
 
     E₀ = vertices(g)
@@ -33,10 +33,10 @@ function successor(g::AbstractGraph)::DiGraph
 end
 succ = successor
 
-```
+"""
 necessary graph before a first interaction graph;
 successor(predecessor(E)) == E iff E is the first interaction graph of some graph.
-```
+"""
 function predecessor(g::AbstractGraph)::DiGraph
     
     E₁ = vertices(g)
