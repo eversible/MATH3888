@@ -2,9 +2,9 @@ using Graphs
 using MetaGraphsNext
 using GraphPlot
 
-```
-first interaction graph
-````
+# g = complete_digraph(4)
+
+# only consider directed graph ?
 function successor(g::AbstractGraph)::DiGraph
 
     E₀ = vertices(g)
@@ -33,10 +33,6 @@ function successor(g::AbstractGraph)::DiGraph
 end
 succ = successor
 
-```
-necessary graph before a first interaction graph;
-successor(predecessor(E)) == E iff E is the first interaction graph of some graph.
-```
 function predecessor(g::AbstractGraph)::DiGraph
     
     E₁ = vertices(g)
@@ -63,6 +59,9 @@ function predecessor(g::AbstractGraph)::DiGraph
         else
             glued_vertices[u] = glued_vertex_names += 1
             glued_vertices[v] = glued_vertex_names
+            #! WRONG !# :
+            # glued_vertices[u] = u
+            # glued_vertices[v] = u
         end
         println(glued_vertices)
     end
@@ -75,22 +74,7 @@ function predecessor(g::AbstractGraph)::DiGraph
 end
 pred = predecessor
 
-
-# convenience functions, e.g. g + 5 or g + 1 - 1
 import Base: +, -
+
 +(g::AbstractGraph, n::Int) = n == 0 ? g : n > 0 ? ∘(repeat([succ], n)...)(g) : ∘(repeat([pred], -n)...)(g)
 -(g::AbstractGraph, n::Int) = g + (-n)
-
-
-# example graph which is not a first interaction graph as observed in the report:
-E = DiGraph(4)
-add_edge!(E, 1, 4)
-add_edge!(E, 4, 1)
-add_edge!(E, 1, 2)
-add_edge!(E, 2, 3)
-add_edge!(E, 3, 4)
-
-E₋ = pred(E)
-E₋₊ = succ(E₋)
-
-E == E₋₊ #* returns FALSE
