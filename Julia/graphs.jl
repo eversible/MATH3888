@@ -50,8 +50,6 @@ function predecessor(g::AbstractGraph)::DiGraph
         u = edge_assignment[s].dst
         d = fe.dst
         v = edge_assignment[d].src
-        println("$s, $d")
-        println("$u, $v")
 
         if haskey(glued_vertices, u)
             glued_vertices[edge_assignment[d].src] = glued_vertices[u]
@@ -61,7 +59,6 @@ function predecessor(g::AbstractGraph)::DiGraph
             glued_vertices[u] = glued_vertex_names += 1
             glued_vertices[v] = glued_vertex_names
         end
-        println(glued_vertices)
     end
 
     for w ∈ 1:created_vertices
